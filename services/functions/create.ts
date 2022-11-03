@@ -25,7 +25,7 @@ export const main: APIGatewayProxyHandlerV2 = async (event) => {
         message: validation.error.message,
       };
 
-    if (body.minute === getNowInMinute()) {
+    if (body.minute === getNowInMinute() - 1) {
       await sqs
         .sendMessage({
           QueueUrl: process.env.queueUrl!,
