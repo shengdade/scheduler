@@ -51,6 +51,7 @@ const generateNextSchedule = async (item: AttributeMap, length: number) => {
     TableName: process.env.tableName!,
     Item: {
       jobId: uuid.v1(),
+      payload: item.payload,
       minute: Number(item.minute) + length,
       recurring: item.recurring,
     },
