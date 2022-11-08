@@ -22,7 +22,8 @@ function JobCreate() {
   const onSubmit = async () => {
     const minute = getScheduleInMinute(schedule, date, time);
     const recurring = getRecurringFlag(schedule);
-    await addJob({ payload, minute, recurring });
+    const immediate = schedule === 'immediate';
+    await addJob({ payload, minute, recurring, immediate });
     setPayload('');
     showNotification({
       color: 'green',

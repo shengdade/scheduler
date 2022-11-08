@@ -3,7 +3,6 @@ import AWS from 'aws-sdk';
 import Joi from 'joi';
 import * as uuid from 'uuid';
 import StatusCode from '../statusCode';
-import { getNowInMinute } from '../utils';
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const sqs = new AWS.SQS();
@@ -14,6 +13,7 @@ export const main: APIGatewayProxyHandlerV2 = async (event) => {
       payload: Joi.string().required(),
       minute: Joi.number().required(),
       recurring: Joi.string().valid('none', 'daily', 'weekly').required(),
+      immediate: Joi.bool().required(),
     }),
   };
 
@@ -25,7 +25,7 @@ export const main: APIGatewayProxyHandlerV2 = async (event) => {
         message: validation.error.message,
       };
 
-    if (body.minute === getNowInMinute() - 1) {
+    if (body.immediate === true) {
       await sqs
         .sendMessage({
           QueueUrl: process.env.queueUrl!,

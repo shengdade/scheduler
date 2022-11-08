@@ -5,4 +5,5 @@ export interface Job {
   payload: string;
   minute: number;
   recurring: Recurring;
+  immediate: boolean;
 }
