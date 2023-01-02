@@ -176,5 +176,3 @@ Status 200
 ### Deployment
 
 The React application is deployed on [AWS Amplify](https://aws.amazon.com/amplify/).
-
-https://main.d26bdzzc5t9w2v.amplifyapp.com/
